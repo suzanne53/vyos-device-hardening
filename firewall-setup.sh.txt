@@ -1,0 +1,13 @@
+#!/bin/vbash
+# Script de configuration pare-feu VyOS
+
+configure
+set firewall name WAN-IN default-action drop
+set firewall name WAN-IN rule 10 action accept
+set firewall name WAN-IN rule 10 protocol tcp
+set firewall name WAN-IN rule 10 destination port 22
+set firewall name WAN-IN rule 10 state new enable
+set interfaces ethernet eth0 firewall in name WAN-IN
+commit
+save
+exit
