@@ -1,0 +1,38 @@
+system {
+    login {
+        user vyos {
+            authentication {
+                plaintext-password Fort@2024
+            }
+        }
+    }
+    service {
+        ssh {
+            port 22
+        }
+    }
+    firewall {
+        name WAN-IN {
+            default-action drop
+            rule 10 {
+                action accept
+                protocol tcp
+                destination {
+                    port 22
+                }
+                state {
+                    new enable
+                }
+            }
+            rule 20 {
+                action drop
+                protocol icmp
+            }
+        }
+    }
+    syslog {
+        global {
+            facility all level info
+        }
+    }
+}
